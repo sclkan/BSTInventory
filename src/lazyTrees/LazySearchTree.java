@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 /**
  * A class that creates BST to add and remove items from inventory in the supermarket
  * It also keeps track of our inventory and finds the lexicographic min and max
+ * Includes new functionality that cleans up the tree via hard deletions
  * @author Sean Kan
  *
  * @param <E>   Generic object
@@ -121,6 +122,10 @@ public class LazySearchTree<E extends Comparable<? super E>>
         return (mSize != oldSize);
     }
 
+    /**
+     * Encapsulation of the collectGarbage method
+     * @return  A boolean stating whether or not item was hard deleted
+     */
     public boolean collectGarbage()
     {
         int oldSize = mSize;
@@ -153,7 +158,7 @@ public class LazySearchTree<E extends Comparable<? super E>>
 
     /**Helper method that does the actual search and finds the min node
      *
-     * @param root    Tree to perform search
+     * @param root    LazySTNode Node
      * @return    Minimum node that has not been deleted
      */
     protected LazySTNode findMin(LazySTNode root)
@@ -170,7 +175,7 @@ public class LazySearchTree<E extends Comparable<? super E>>
 
     /**
      * Helper method that does the actual search and finds the max node
-     * @param root   Tree to perform search
+     * @param root   LazySTNode Node
      * @return    Maximum node that has not been deleted
      */
     protected LazySTNode findMax(LazySTNode root)
@@ -187,7 +192,7 @@ public class LazySearchTree<E extends Comparable<? super E>>
 
     /**
      * Helper method that finds the true minimum
-     * @param root    Tree to perform search
+     * @param root    LazySTNode Node
      * @return   Minimum node regardless of deletion
      */
     protected LazySTNode findMinHard(LazySTNode root)
@@ -201,7 +206,7 @@ public class LazySearchTree<E extends Comparable<? super E>>
 
     /**
      * Helper method that finds the true maximum
-     * @param root    Tree to perform search
+     * @param root    LazySTNode Node
      * @return    Maximum node regardless of deletion
      */
     protected LazySTNode findMaxHard(LazySTNode root)
@@ -215,9 +220,9 @@ public class LazySearchTree<E extends Comparable<? super E>>
 
     /**
      * Help method that does the actually insertion
-     * @param root   Tree
+     * @param root   LazySTNode Node
      * @param x    Item to add to tree
-     * @return   Node
+     * @return   Inserted node
      */
     protected LazySTNode insert(LazySTNode root, E x)
     {
@@ -244,7 +249,7 @@ public class LazySearchTree<E extends Comparable<? super E>>
 
     /**
      * Helper method that does the actual removal
-     * @param root   Tree
+     * @param root   LazySTNode Node
      * @param x   Items to delete from tree
      */
     protected void remove(LazySTNode root, E x)
@@ -267,6 +272,12 @@ public class LazySearchTree<E extends Comparable<? super E>>
         return;
     }
 
+    /**
+     * Helper method that performs hard deletion
+     * @param root    LazySTNode Node
+     * @param x    Items to delete from tree
+     * @return   Object of the removed node
+     */
     protected LazySTNode removeHard(LazySTNode root, E x  ) {
         int compareResult;  // avoid multiple calls to compareTo()
 
@@ -278,8 +289,7 @@ public class LazySearchTree<E extends Comparable<? super E>>
             root.lftChild = removeHard(root.lftChild, x);
         else if (compareResult > 0)
             root.rtChild = removeHard(root.rtChild, x);
-
-            // found the node
+        // found the node
         else if (root.lftChild != null && root.rtChild != null)
         {
             LazySTNode FMHresult = findMinHard(root.rtChild); //store the result of findMinHard
@@ -295,6 +305,11 @@ public class LazySearchTree<E extends Comparable<? super E>>
         return root;
     }
 
+    /**
+     * Helper method that actually hard deletes all the lazy deleted nodes
+     * @param root   LazySTNode Node
+     * @return   Tree with all deleted nodes removed
+     */
     protected LazySTNode collectGarbage(LazySTNode root)
     {
         if (root == null)
@@ -311,6 +326,7 @@ public class LazySearchTree<E extends Comparable<? super E>>
 
         return root;
     }
+
     /**
      * Helper function that traverses both deleted and undeleted nodes in tree
      * @param func   PrintObject
@@ -345,7 +361,7 @@ public class LazySearchTree<E extends Comparable<? super E>>
 
     /**
      * Helper function that searches for a node
-     * @param root   Tree
+     * @param root   LazySTNode Node
      * @param x   Desired item
      * @return   Node
      */
