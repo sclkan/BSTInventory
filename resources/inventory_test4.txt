@@ -16,6 +16,7 @@ buy turnips
 buy cookies
 buy milk
 buy eggplant
+buy milk
 add tuna
 add lettuce
 add tuna
