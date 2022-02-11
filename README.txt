@@ -33,6 +33,9 @@ resources/inventory_log.txt
 resources/inventory_short.txt
     - Short inventory file to test for removal of root node from LazySearchTree
 
+resources/inventory_test4.txt
+    - Additional file to thoroughly test the program
+
 resources/RUN.txt
     - console output of SuperMarket.java
 
