@@ -129,7 +129,7 @@ public class LazySearchTree<E extends Comparable<? super E>>
     public boolean collectGarbage()
     {
         int oldSize = mSize;
-        collectGarbage(mRoot);
+        mRoot = collectGarbage(mRoot);
         return (mSize != oldSize);
     }
 
@@ -283,7 +283,6 @@ public class LazySearchTree<E extends Comparable<? super E>>
 
         if (root == null)
             return null;
-
         compareResult = x.compareTo(root.data);
         if (compareResult < 0)
             root.lftChild = removeHard(root.lftChild, x);
@@ -292,9 +291,9 @@ public class LazySearchTree<E extends Comparable<? super E>>
         // found the node
         else if (root.lftChild != null && root.rtChild != null)
         {
-            LazySTNode FMHresult = findMinHard(root.rtChild); //store the result of findMinHard
-            root.data = FMHresult.data;
-            root.dltFlag = FMHresult.dltFlag;
+            LazySTNode fmhResult = findMinHard(root.rtChild); //store the result of findMinHard
+            root.data = fmhResult.data;
+            root.dltFlag = fmhResult.dltFlag;
             root.rtChild = removeHard(root.rtChild, root.data);
         }
         else
@@ -314,16 +313,12 @@ public class LazySearchTree<E extends Comparable<? super E>>
     {
         if (root == null)
             return null;
-
         if (root.lftChild!=null)
             root.lftChild = collectGarbage(root.lftChild);
-
         if (root.rtChild!=null)
             root.rtChild = collectGarbage(root.rtChild);
-
         if (root.dltFlag)
             root = removeHard(root, root.data);
-
         return root;
     }
 
