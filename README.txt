@@ -25,16 +25,17 @@ src/lazyTrees/Traverser.java
     - An interface for tree traversal algorithms
 
 resources/inventory_invalid_removal.txt
-    - An example of testing the boundary condition when removing an item that may not exist
+    - Inventory file to test the boundary condition when removing an item that may not exist
 
 resources/inventory_log.txt
-    - Inventory file to test for item addition and removal
+    - A general list to test for item addition and removal
 
 resources/inventory_short.txt
     - Short inventory file to test for removal of root node from LazySearchTree
 
 resources/inventory_test4.txt
-    - Additional file to thoroughly test the program
+    - Inventory file that first removes every node on a tree and adds new items afterward
+    - This rigorous test traverses the entire tree to ensure our removals are working properly and hard/soft inventories are accurately displayed
 
 resources/RUN.txt
     - console output of SuperMarket.java
