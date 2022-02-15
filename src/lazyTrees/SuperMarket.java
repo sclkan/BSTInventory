@@ -205,7 +205,7 @@ public class SuperMarket
 		// NOTE: An example of testing the boundary condition when removing an item that may not exist
 		//final String TESTFILE = "resources/inventory_invalid_removal.txt";
 
-		//Additional file to thoroughly test the program
+		//An inventory file that first removes every node on a tree and adds new items afterward for robust testing
 		//final String TESTFILE = "resources/inventory_test4.txt";
 
 		System.out.printf("Test file: %s \n", TESTFILE);
