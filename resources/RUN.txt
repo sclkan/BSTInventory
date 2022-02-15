@@ -1126,7 +1126,8 @@ Process finished with exit code 0
 -----------------------------------------------------
 Test file: resources/inventory_test4.txt
 
-NOTES: Additional file to thoroughly test the program
+NOTES: Inventory file that first removes every node on a tree and adds new items afterward
+This test ensures our removals are working properly and inventories are accurately displayed
 -----------------------------------------------------
 Test file: resources/inventory_test4.txt
 Garbage collection threshold = 4
