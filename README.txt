@@ -1,7 +1,3 @@
-project folder:
-sclkan-cs1c-project05/
-
-
 Brief description of submitted files:
 
 src/lazyTrees/Item.java
